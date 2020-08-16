@@ -87,7 +87,6 @@ public class GraphReader : MonoBehaviour
         Debug.Log(Time.realtimeSinceStartup);
         MapEdges();
         again = true;
-        Graph.UpdatePositions();
     }
 
    private void MapEdges()
@@ -127,7 +126,7 @@ public class GraphReader : MonoBehaviour
     {
         //if (again)
         //{
-            Graph.UpdatePositions();
+         //   Graph.UpdatePositions();
         //}     
     }
 }
