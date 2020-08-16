@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainSystem : MonoBehaviour
 {
     const int FORCE_BASED = 1;
-    const int STATIC_CIRCULAR = 2;
+    const int RANDOM_CIRCULAR = 2;
     private int MODE;
     private int LAST_MODE;
 
@@ -31,10 +31,10 @@ public class MainSystem : MonoBehaviour
                 LAST_MODE = FORCE_BASED;
                 Graph.UpdatePositions_FBG();
                 break;
-            case STATIC_CIRCULAR:
+            case RANDOM_CIRCULAR:
                 if (MODE != LAST_MODE)
                 {
-                    LAST_MODE = STATIC_CIRCULAR;
+                    LAST_MODE = RANDOM_CIRCULAR;
                     Graph.Draw_Circular();
                 }
                 break;
