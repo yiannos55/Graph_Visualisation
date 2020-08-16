@@ -19,8 +19,8 @@ public class GraphReader : MonoBehaviour
          NodesHash = new Hashtable();
         
         ///---------------- LOAD SOURCE FILE------------
-        string sourceFile = Application.dataPath + "/Data/random100_300Graph.graphml";
-        //string sourceFile = Application.dataPath + "/Data/proteins.graphml";
+        //string sourceFile = Application.dataPath + "/Data/random100_300Graph.graphml";
+        string sourceFile = Application.dataPath + "/Data/proteins.graphml";
 
         XmlDocument graphmlDoc = new XmlDocument();
         Debug.Log(Time.time);
@@ -67,7 +67,7 @@ public class GraphReader : MonoBehaviour
                                     node.type = nodeData.InnerText;
                                     break;
                                 case "displayName":
-                                    //node.displayName = nodeData.InnerText;
+                                    node.displayName = nodeData.InnerText;
                                     break;                                 
                             }
                         }
