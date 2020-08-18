@@ -105,6 +105,51 @@ public class Graph : MonoBehaviour
         }
     }
 
+    public void SortAndDraw()
+    {
+        Nodes.Sort((x, y) => x.Neighbours.Count.CompareTo(y.Neighbours.Count));
+        Nodes.Reverse();
+        foreach(Node a in Nodes)
+        {
+            Debug.Log(a.Neighbours.Count);
+        }
+        RecureDraw(Nodes);
+
+    }
+
+    public void RecureDraw(List<Node> nodes)
+    {
+        foreach (Node a in nodes)
+        {
+
+            if (a.isVisited) { continue; }
+            else
+            {
+                if(a == Nodes[0]) 
+                {
+                    a.transform.position = new Vector3(0, 0, 0);
+                }
+                else
+                {
+                    a.transform.position = Random.onUnitSphere * 70;
+                }
+                
+                foreach (Node b in a.Neighbours)
+                {
+                    if (b.isVisited) { continue; }
+                    if (b.Neighbours.Count > a.Neighbours.Count / 3) { continue; }
+                    else
+                    {
+                        b.transform.position = a.transform.position + Random.onUnitSphere * 5;
+                        b.isVisited = true;
+                       // recureDraw(b.Neighbours);
+                    }
+                }
+                a.isVisited = true;
+            }
+
+        }
+    }
     // Update is called once per frame
     void Update()
     {

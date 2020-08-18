@@ -23,6 +23,7 @@ public class Node : MonoBehaviour
     public List<Node> Neighbours;
     public List<Edge> Connections;
 
+    public bool isVisited = false;
     // Start is called before the first frame update
     void Start()
     {
