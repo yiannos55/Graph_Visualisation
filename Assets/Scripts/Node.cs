@@ -34,24 +34,27 @@ public class Node : MonoBehaviour
         //GetComponent<Renderer>().material.color = Color.red;
         switch (type)
         {
-            case "RProtein":
+            case "RProtein": case "Protein":
 
                 //Vector3 pos = new Vector3(Random.Range(1, 40), 1, Random.Range(1, 40));
                 //transform.position = pos;
                 //  GetComponent<Renderer>().material.color = Color.red;
                 rend.sharedMaterial = material[0];
                 break;
-            case "RPathway":
+            case "RPathway":  case "Pathway":
                 //Vector3 pos1 = new Vector3(Random.Range(1, 40), 10, Random.Range(1, 40));
                 //transform.position = pos1;
                 rend.sharedMaterial = material[1];
                 //GetComponent<Renderer>().material.color = Color.green;
                 break;
-            case "RGene":
+            case "RGene":     case "Gene":
                 //Vector3 pos2 = new Vector3(Random.Range(1, 40), 20, Random.Range(1, 40));
                 //transform.position = pos2;
                 rend.sharedMaterial = material[2];
                 // GetComponent<Renderer>().material.color = Color.blue;
+                break;
+            case "Disorder":
+                rend.sharedMaterial = material[3];
                 break;
         }
         //Instantiate(Node);

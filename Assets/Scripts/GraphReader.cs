@@ -17,10 +17,11 @@ public class GraphReader : MonoBehaviour
     public void Start()
     {
          NodesHash = new Hashtable();
-        
+
         ///---------------- LOAD SOURCE FILE------------
-        string sourceFile = Application.dataPath + "/Data/random100_300Graph.graphml";
-        //string sourceFile = Application.dataPath + "/Data/proteins.graphml";
+        //string sourceFile = Application.dataPath + "/Data/random100_300Graph.graphml";
+        string sourceFile = Application.dataPath + "/Data/proteins.graphml";
+        //string sourceFile = Application.dataPath + "/Data/subset.graphml";
 
         XmlDocument graphmlDoc = new XmlDocument();
         Debug.Log(Time.time);
@@ -52,7 +53,7 @@ public class GraphReader : MonoBehaviour
 
                     NodesHash.Add(node.id, node);
                     Graph.Nodes.Add(node);
-                    node.displayName = node.id;
+                    //node.displayName = node.id;
 
                     for (int k = 0; k < xmlNode.ChildNodes.Count; k++)
                     {
@@ -63,10 +64,10 @@ public class GraphReader : MonoBehaviour
 
                             switch (dataValue)
                             {
-                                case "type":
+                                case "type": case "d2":
                                     node.type = nodeData.InnerText;
                                     break;
-                                case "displayName":
+                                case "displayName": case "d1":
                                     node.displayName = nodeData.InnerText;
                                     break;                                 
                             }
@@ -75,8 +76,8 @@ public class GraphReader : MonoBehaviour
                 }
                 if (xmlNode.Name == "edge")
                 {
-                    Edge edge = Instantiate(edgePrefab, new Vector3(0, 0, 0), Quaternion.identity, Graph.transform) as Edge;
-
+                    //Edge edge = Instantiate(edgePrefab, new Vector3(0, 0, 0), Quaternion.identity, Graph.transform) as Edge;
+                    Edge edge = new Edge();
                     edge.sourceID = xmlNode.Attributes["source"].Value;
                     edge.targetID = xmlNode.Attributes["target"].Value;
 

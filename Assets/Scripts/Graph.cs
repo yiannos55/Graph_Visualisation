@@ -78,20 +78,29 @@ public class Graph : MonoBehaviour
             switch (node.type)
             {
                 case "RProtein":
+                case "Protein":
                     Vector3 random_protein_position = Random.onUnitSphere * 10;
                     random_protein_position.y = 0;
                     node.transform.position = random_protein_position;
                     break;
                 case "RPathway":
-                    Vector3 random_pathway_position = Random.onUnitSphere * 7;
+                case "Pathway":
+                    Vector3 random_pathway_position = Random.onUnitSphere * 10;
                     random_pathway_position.y = -5;
                     node.transform.position = random_pathway_position;
                     break;
                 case "RGene":
-                    Vector3 random_gene_position = Random.onUnitSphere * 7;
+                case "Gene":
+                    Vector3 random_gene_position = Random.onUnitSphere * 10;
                     random_gene_position.y = 5;
                     node.transform.position = random_gene_position;
                     break;
+                case "Disorder":
+                    Vector3 random_disorder_position = Random.onUnitSphere * 10;
+                    random_disorder_position.y = 10;
+                    node.transform.position = random_disorder_position;
+                    break;
+
             }
         }
     }
