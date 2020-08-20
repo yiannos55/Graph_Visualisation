@@ -49,6 +49,7 @@ MonoBehaviour:
   source: {fileID: 0}
   target: {fileID: 0}
   edge: {fileID: -2891689919436123519}
+  isActive: 0
 --- !u!120 &-2891689919436123519
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0, g: 0, b: 1, a: 1}
-      key1: {r: 0, g: 0, b: 1, a: 1}
+      key1: {r: 1, g: 0.02664388, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

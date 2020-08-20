@@ -76,8 +76,8 @@ public class GraphReader : MonoBehaviour
                 }
                 if (xmlNode.Name == "edge")
                 {
-                    //Edge edge = Instantiate(edgePrefab, new Vector3(0, 0, 0), Quaternion.identity, Graph.transform) as Edge;
-                    Edge edge = new Edge();
+                    Edge edge = Instantiate(edgePrefab, new Vector3(0, 0, 0), Quaternion.identity, Graph.transform) as Edge;
+                    //Edge edge = new Edge();
                     edge.sourceID = xmlNode.Attributes["source"].Value;
                     edge.targetID = xmlNode.Attributes["target"].Value;
 

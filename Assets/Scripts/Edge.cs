@@ -9,6 +9,7 @@ public class Edge : MonoBehaviour
     public Node source;
     public Node target;
     public LineRenderer edge;
+    public bool isActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +28,21 @@ public class Edge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (source && target)
+        if (!isActive)
         {
-            setStart();
-            setEnd();
+            edge.enabled = false;
         }
+        if (isActive)
+        {
+            edge.enabled = true;
+            if (source && target)
+            {
+            
+                setStart();
+                setEnd();
+            }
+        }
+
     }
 
     private void setStart()
