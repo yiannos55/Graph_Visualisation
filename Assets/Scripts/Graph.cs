@@ -137,10 +137,10 @@ public class Graph : MonoBehaviour
                 foreach (Node b in a.Neighbours)
                 {
                     if (b.isVisited) { continue; }
-                    if (b.Neighbours.Count > a.Neighbours.Count / 3) { continue; }
+                    if (b.Neighbours.Count > a.Neighbours.Count / 4) { continue; }
                     else
                     {
-                        b.transform.position = a.transform.position + Random.onUnitSphere * 5;
+                        b.transform.position = a.transform.position + Random.onUnitSphere * 10;
                         b.isVisited = true;
                        // recureDraw(b.Neighbours);
                     }

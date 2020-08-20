@@ -24,11 +24,14 @@ public class Node : MonoBehaviour
     public List<Edge> Connections;
 
     public bool isVisited = false;
+
+    //public bool isActive = true;
+    public Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
         Name.text = displayName;
-        Renderer rend = GetComponent<Renderer>();
+        rend = GetComponent<Renderer>();
 
         rend.enabled = true;
         Vector3 random_position = Random.onUnitSphere * 5;
@@ -67,6 +70,14 @@ public class Node : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (isActive)
+        //{
+        //    rend.enabled = true;
+        //}
+        //else if (!isActive)
+        //{
+        //    rend.enabled = false;
+        //}
         //GetComponent<Renderer>().material.color = new Color(transform.position.normalized.x, transform.position.normalized.y, transform.position.normalized.z, 1);
 
     }
@@ -80,8 +91,10 @@ public class Node : MonoBehaviour
 
             edge.edge.material.color = Color.red;
             edge.edge.SetWidth(0.3f, 0.3f);
-            edge.edge.SetPosition(0, transform.position);
-            edge.edge.SetPosition(1, edge.target.transform.position);
+            //edge.edge.SetPosition(0, transform.position);
+            //edge.edge.SetPosition(1, edge.target.transform.position);
+
+            edge.isActive = true;
         }
     }
     private void OnMouseExit()
@@ -92,6 +105,7 @@ public class Node : MonoBehaviour
 
             edge.edge.material.color = Color.gray;
             edge.edge.SetWidth(0.02f, 0.02f);
+            edge.isActive = false;
         }
     }
 }
