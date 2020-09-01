@@ -5,6 +5,7 @@ using System.Xml;
 
 public class GraphReader : MonoBehaviour
 {
+    public TestingReader testingReader;
     public Graph Graph;
     public Node nodePrefab;
     public Edge edgePrefab;
@@ -19,6 +20,7 @@ public class GraphReader : MonoBehaviour
          NodesHash = new Hashtable();
 
         ///---------------- LOAD SOURCE FILE------------
+        //string sourceFile = Application.dataPath + "/Data/random10_15Graph.graphml";
         //string sourceFile = Application.dataPath + "/Data/random100_300Graph.graphml";
         string sourceFile = Application.dataPath + "/Data/proteins.graphml";
         //string sourceFile = Application.dataPath + "/Data/subset.graphml";

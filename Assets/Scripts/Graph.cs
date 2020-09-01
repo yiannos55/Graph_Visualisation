@@ -6,13 +6,13 @@ public class Graph : MonoBehaviour
 {
     public int scale = 1;
     public bool again;
-    
+
     public List<Node> Nodes;
     public List<Edge> Edges;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void UpdatePositions_FBG()
@@ -74,7 +74,6 @@ public class Graph : MonoBehaviour
     {
         foreach (Node node in Nodes)
         {
-            
             switch (node.type)
             {
                 case "RProtein":
@@ -100,7 +99,6 @@ public class Graph : MonoBehaviour
                     random_disorder_position.y = 10;
                     node.transform.position = random_disorder_position;
                     break;
-
             }
         }
     }
@@ -109,7 +107,7 @@ public class Graph : MonoBehaviour
     {
         Nodes.Sort((x, y) => x.Neighbours.Count.CompareTo(y.Neighbours.Count));
         Nodes.Reverse();
-        foreach(Node a in Nodes)
+        foreach (Node a in Nodes)
         {
             Debug.Log(a.Neighbours.Count);
         }
@@ -121,18 +119,13 @@ public class Graph : MonoBehaviour
     {
         foreach (Node a in nodes)
         {
-
             if (a.isVisited) { continue; }
             else
             {
-                if(a == Nodes[0]) 
-                {
+                if (a == Nodes[0])
                     a.transform.position = new Vector3(0, 0, 0);
-                }
                 else
-                {
                     a.transform.position = Random.onUnitSphere * 70;
-                }
                 
                 foreach (Node b in a.Neighbours)
                 {
@@ -142,24 +135,86 @@ public class Graph : MonoBehaviour
                     {
                         b.transform.position = a.transform.position + Random.onUnitSphere * 10;
                         b.isVisited = true;
-                       // recureDraw(b.Neighbours);
+                        // recureDraw(b.Neighbours);
                     }
                 }
                 a.isVisited = true;
             }
-
         }
     }
+
+
+    /// testing binary distance///
+    public class Connection
+    {
+       public Node node1;
+       public Node node2;
+       public float similarity;
+
+        public Connection(Node node1, Node node2, float similarity)
+        {
+            this.node1 = node1;
+            this.node2 = node2;
+            this.similarity = similarity;
+        }
+       
+    }
+
+    public List<Connection> FindDistances()
+    {
+        List<Connection> connections = new List<Connection>();
+
+        foreach (Node node1 in Nodes)
+        {
+            foreach (Node node2 in Nodes)
+            {
+                if (node1 == node2) { continue; }
+              //  Nodes[3]=new Node();
+                int sum = 0;
+                if (node1.Neighbours.Count >= node2.Neighbours.Count)
+                {
+                    foreach (Node node1Bro in node1.Neighbours)
+                    {
+                        if (node2.Neighbours.Contains(node1Bro))
+                        {
+                            sum++;
+                        }
+                    }
+                    connections.Add(new Connection(node1, node2, sum / Nodes.Count));
+                }
+                else if (node1.Neighbours.Count < node2.Neighbours.Count)
+                {
+                    foreach (Node node2Bro in node2.Neighbours)
+                    {
+                        if (node1.Neighbours.Contains(node2Bro))
+                        {
+                            sum++;
+                        }
+                    }
+                    connections.Add(new Connection(node1, node2, sum / Nodes.Count));
+                }
+            }
+        }
+        foreach (Connection SMC in connections)
+        {
+            //System.Console.Write("  Node1:  ", SMC.node1.id);
+            //System.Console.Write("  Node1:  ", SMC.node2.id);
+            //System.Console.Write("  dist: ", SMC.similarity);
+            Debug.Log("Node1 :" + SMC.node1.id + "  Node 2 :" + SMC.node2.id + "dist  :" + SMC.similarity);
+        }
+        return connections;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
-        
+
+
     }
 
     public void setScale(float newScale)
     {
-        transform.localScale=new Vector3(1,1,1)*newScale;
+        transform.localScale = new Vector3(1, 1, 1) * newScale;
     }
     public void Init()
     {
