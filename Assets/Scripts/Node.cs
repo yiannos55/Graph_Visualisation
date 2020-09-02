@@ -70,12 +70,12 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //foreach(Node node in Neighbours)
+        //foreach (Node node in Neighbours)
         //{
         //    Vector3 currentPosition = node.GetPosition();
         //    Vector3 direction = currentPosition - GetPosition();
 
-        //    node.transform.position = currentPosition-direction/2;
+        //    node.transform.position = currentPosition - direction / 2;
         //}
         foreach (Edge edge in Connections)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MainSystem : MonoBehaviour
 {
     const int FORCE_BASED = 1;
@@ -13,9 +13,16 @@ public class MainSystem : MonoBehaviour
     private int MODE;
     private int LAST_MODE;
 
+    //public InputField nodeA_input;
+    //public InputField nodeB_input;
+
     public Graph Graph;
     public ForceBasedGraph Force_Based_Graph;
     public NodeComparer nodeComparer;
+
+    public string a;
+    public string b;
+
 
     public BinaryDistance binaryDistance;
     //public GraphReader Reader;
@@ -23,6 +30,8 @@ public class MainSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        a = "EMPTY";
+        b = "EMPTY";
         // Reader = new GraphReader();
         MODE = 0;
         LAST_MODE = 0;
@@ -60,32 +69,21 @@ public class MainSystem : MonoBehaviour
                 }
                 break;
             case COMPARE:
-                //nodeComparer.
-                
                 if (MODE!=LAST_MODE)   
                 {
                     LAST_MODE = COMPARE;
-                    string a = "PPR17_HUMAN";
-                    string b = "KR108_HUMAN";
-
                     Node tempNodeA = Graph.Nodes.Find(node => node.displayName.Contains(a));
                     Node tempNodeB = Graph.Nodes.Find(node => node.displayName.Contains(b));
-                    if (tempNodeA==null || tempNodeB == null)
+                    if (tempNodeA == null || tempNodeB == null)
                     {
                         Debug.Log("Node not found");
                         break;
                     }
-                    Debug.Log(Graph.Nodes.Find(node => node.displayName.Equals(a)));
-                    //nodeComparer.CompareNodes(Graph.Nodes.Find(node => node.displayName.Equals(a)), Graph.Nodes.Find(node => node.displayName.Equals(b)));
                     nodeComparer.CompareNodes(tempNodeA, tempNodeB);
+
+                    //nodeComparer.CompareNodes();
                 }
-
                 break;
-            //case PAUSE:
-            //    if (MODE != LAST_MODE)
-            //    {
-
-            //    }
             default:
                 break;
         }
@@ -99,5 +97,14 @@ public class MainSystem : MonoBehaviour
     public void SetMode(int newMode)
     {
         MODE = newMode;
+    }
+    public void setStringA(string nodeA)
+    {
+        a = nodeA;
+    }
+
+    public void setStringB(string nodeB)
+    {
+        b = nodeB;
     }
 }

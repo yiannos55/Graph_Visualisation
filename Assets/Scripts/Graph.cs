@@ -105,13 +105,15 @@ public class Graph : MonoBehaviour
 
     public void SortAndDraw()
     {
-        Nodes.Sort((x, y) => x.Neighbours.Count.CompareTo(y.Neighbours.Count));
+        List<Node> sortedNodes;
+        sortedNodes = Nodes;
+        sortedNodes.Sort((x, y) => x.Neighbours.Count.CompareTo(y.Neighbours.Count));
         Nodes.Reverse();
-        foreach (Node a in Nodes)
-        {
-            Debug.Log(a.Neighbours.Count);
-        }
-        RecureDraw(Nodes);
+        //foreach (Node a in Nodes)
+        //{
+        //    Debug.Log(a.Neighbours.Count);
+        //}
+        RecureDraw(sortedNodes);
 
     }
 
@@ -200,7 +202,7 @@ public class Graph : MonoBehaviour
             //System.Console.Write("  Node1:  ", SMC.node1.id);
             //System.Console.Write("  Node1:  ", SMC.node2.id);
             //System.Console.Write("  dist: ", SMC.similarity);
-            Debug.Log("Node1 :" + SMC.node1.id + "  Node 2 :" + SMC.node2.id + "dist  :" + SMC.similarity);
+            //Debug.Log("Node1 :" + SMC.node1.id + "  Node 2 :" + SMC.node2.id + "dist  :" + SMC.similarity);
         }
         return connections;
     }
