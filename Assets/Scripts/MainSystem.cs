@@ -13,9 +13,6 @@ public class MainSystem : MonoBehaviour
     private int MODE;
     private int LAST_MODE;
 
-    //public InputField nodeA_input;
-    //public InputField nodeB_input;
-
     public Graph Graph;
     public ForceBasedGraph Force_Based_Graph;
     public NodeComparer nodeComparer;
@@ -23,9 +20,7 @@ public class MainSystem : MonoBehaviour
     public string a;
     public string b;
 
-
     public BinaryDistance binaryDistance;
-    //public GraphReader Reader;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +35,7 @@ public class MainSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //main menu, buttons detemine which mode to execute.
         switch (MODE)
         {
             case FORCE_BASED:
@@ -80,19 +75,12 @@ public class MainSystem : MonoBehaviour
                         break;
                     }
                     nodeComparer.CompareNodes(tempNodeA, tempNodeB);
-
                     //nodeComparer.CompareNodes();
                 }
                 break;
             default:
                 break;
         }
-
-    }
-    void OnGUI()
-    {
-        if (GUILayout.Button("Press Me"))
-            Debug.Log("Hello!");
     }
     public void SetMode(int newMode)
     {
@@ -102,7 +90,6 @@ public class MainSystem : MonoBehaviour
     {
         a = nodeA;
     }
-
     public void setStringB(string nodeB)
     {
         b = nodeB;

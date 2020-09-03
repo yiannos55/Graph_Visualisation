@@ -13,15 +13,6 @@ public class Node : MonoBehaviour
     public string type;
 
     public Material[] material;
-    //public string SUID;
-    //public string shared_name;
-    //public string primaryDataset;
-
-    //public string domainID;
-
-    //public string uid;
-    //public string refSeqId;
-    //public string unitprotEntryName; 
 
     public List<Node> Neighbours;
     public List<Edge> Connections;
@@ -31,6 +22,10 @@ public class Node : MonoBehaviour
     //public bool isActive = true;
     public Renderer rend;
     // Start is called before the first frame update
+    public Node(string displayName)
+    {
+        this.displayName = displayName;
+    }
     void Start()
     {
         Name.text = displayName;
@@ -58,11 +53,6 @@ public class Node : MonoBehaviour
         return transform.position;
     }
 
-    //private void setID(string omg)
-    //{
-    //    intiID = System.Int64.Parse(omg);
-    //}
-    // Update is called once per frame
     void Update()
     {
         

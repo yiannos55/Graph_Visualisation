@@ -20,23 +20,30 @@ public class NodeComparer : MonoBehaviour
     }
     public void CompareNodes(Node a, Node b)
     {
-        
+        foreach(Transform child in transform.GetChild(0))
+        {
+            DestroyImmediate(child.gameObject);
+            //Destroy(child.gameObject);
+        }
+        foreach (Transform child in transform.GetChild(1))
+        {
+            DestroyImmediate(child.gameObject);
+        }
+        //Destroy(transform.Find("Node1Holder").transform.GetChild(0));
         nodeA = a;
-        nodeB = b;
-            
-        nodeA = Instantiate(a, transform.Find("Node1Holder").position, Quaternion.identity, transform.Find("Node1Holder"));
-        nodeB = Instantiate(b, transform.Find("Node2Holder").position, Quaternion.identity, transform.Find("Node2Holder"));
+        nodeB = b;         
+        
+        nodeA = Instantiate(nodeA, transform.Find("Node1Holder").position, Quaternion.identity, transform.Find("Node1Holder"));
+        nodeB = Instantiate(nodeB, transform.Find("Node2Holder").position, Quaternion.identity, transform.Find("Node2Holder"));
 
         foreach (Node neighbour in nodeA.Neighbours)
         {  
-            if (nodeA == neighbour) { break; }
-            //Instantiate(neighbour, nodeA.transform.position + Random.onUnitSphere, Quaternion.identity, nodeA.transform);
+            if (nodeA == neighbour) { continue; }
             node1Neighbours.Add(neighbour);
         }                              
         foreach (Node neighbour in nodeB.Neighbours)
         {       
-            if (nodeB == neighbour) { break; }
-            //Instantiate(neighbour, nodeB.transform.position + Random.onUnitSphere, Quaternion.identity, nodeB.transform);
+            if (nodeB == neighbour) { continue; }
             node2Neighbours.Add(neighbour);
         }
 
@@ -49,28 +56,21 @@ public class NodeComparer : MonoBehaviour
             Instantiate(node, nodeB.transform.position + Random.onUnitSphere, Quaternion.identity, nodeB.transform);
         }
 
+
+        foreach (Node nodea in node1Neighbours)
+        {
+            foreach (Node nodeb in node2Neighbours)
+            {
+                if (nodea == nodeb)
+                {
+                    nodea.rend.material.color = Color.cyan;
+                    nodeb.rend.material.color = Color.cyan;
+                }
+            }
+
+        }
     }
 
-    //public void CompareNode()
-    //{
-    //    if (nodeA==null || nodeB == null)
-    //    {
-    //        Debug.Log("Node empty or not found");
-    //    }
-    //    else
-    //    {
-    //        Instantiate(nodeA, transform.Find("Node1Holder").position, Quaternion.identity, transform.Find("Node1Holder"));
-    //        Instantiate(nodeB, transform.Find("Node2Holder").position, Quaternion.identity, transform.Find("Node2Holder"));
-    //        foreach (Node nodeA_neighbour in nodeA.Neighbours)
-    //        {
-    //            copyNeighboursA.Add(nodeA_neighbour);
-    //        }
-    //        foreach(Node nodeB_neighbour in nodeB.Neighbours)
-    //        {
-    //            copyNeighboursB.Add(nodeB_neighbour);
-    //        }
-    //    }
-    //}
     public void SetNodeA(string a)
     {
         nodeA = graph.Nodes.Find(node => node.displayName.Contains(a));

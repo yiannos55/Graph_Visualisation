@@ -18,7 +18,6 @@ public class Graph : MonoBehaviour
     public void UpdatePositions_FBG()
     {
         //repulsion between nodes
-
         float totalEnergy = 0;
         foreach (Node a in Nodes)
         {
@@ -41,9 +40,9 @@ public class Graph : MonoBehaviour
             }
         }
 
+        //attraction between connected Nodes
         foreach (Edge edge in Edges)
         {
-
             Vector3 targetpos = edge.target.transform.position;
             Vector3 sourcepos = edge.source.transform.position;
             Vector3 direction = targetpos - sourcepos;
@@ -52,7 +51,6 @@ public class Graph : MonoBehaviour
             if (distance > 0)
             {
                 float c = 3;
-                // if (edge.target == root || edge.source == root) c *= 5000;
                 float f = -0.001f * c * distance;
                 targetpos += direction / distance * f;
                 sourcepos -= direction / distance * f;
@@ -72,32 +70,34 @@ public class Graph : MonoBehaviour
 
     public void Draw_Circular()
     {
+        // Nodes clustered by type, each type gets assigned its own height
         foreach (Node node in Nodes)
         {
+            Vector3 randomPosition = Random.onUnitSphere * 10;
             switch (node.type)
             {
                 case "RProtein":
                 case "Protein":
-                    Vector3 random_protein_position = Random.onUnitSphere * 10;
-                    random_protein_position.y = 0;
-                    node.transform.position = random_protein_position;
+                    //Vector3 random_protein_position = Random.onUnitSphere * 10;
+                    randomPosition.y = 0;
+                    node.transform.position = randomPosition;
                     break;
                 case "RPathway":
                 case "Pathway":
-                    Vector3 random_pathway_position = Random.onUnitSphere * 10;
-                    random_pathway_position.y = -5;
-                    node.transform.position = random_pathway_position;
+                    //Vector3 random_pathway_position = Random.onUnitSphere * 10;
+                    randomPosition.y = -5;
+                    node.transform.position = randomPosition;
                     break;
                 case "RGene":
                 case "Gene":
-                    Vector3 random_gene_position = Random.onUnitSphere * 10;
-                    random_gene_position.y = 5;
-                    node.transform.position = random_gene_position;
+                    //Vector3 random_gene_position = Random.onUnitSphere * 10;
+                    randomPosition.y = 5;
+                    node.transform.position = randomPosition;
                     break;
                 case "Disorder":
-                    Vector3 random_disorder_position = Random.onUnitSphere * 10;
-                    random_disorder_position.y = 10;
-                    node.transform.position = random_disorder_position;
+                    //Vector3 random_disorder_position = Random.onUnitSphere * 10;
+                    randomPosition.y = 10;
+                    node.transform.position = randomPosition;
                     break;
             }
         }
@@ -105,10 +105,14 @@ public class Graph : MonoBehaviour
 
     public void SortAndDraw()
     {
+        foreach(Node node in Nodes)
+        {
+            node.isVisited = false;
+        }
         List<Node> sortedNodes;
         sortedNodes = Nodes;
         sortedNodes.Sort((x, y) => x.Neighbours.Count.CompareTo(y.Neighbours.Count));
-        Nodes.Reverse();
+        sortedNodes.Reverse();
         //foreach (Node a in Nodes)
         //{
         //    Debug.Log(a.Neighbours.Count);
@@ -124,10 +128,10 @@ public class Graph : MonoBehaviour
             if (a.isVisited) { continue; }
             else
             {
-                if (a == Nodes[0])
+                if (a == nodes[0])
                     a.transform.position = new Vector3(0, 0, 0);
                 else
-                    a.transform.position = Random.onUnitSphere * 70;
+                    a.transform.position = Random.onUnitSphere * 10;
                 
                 foreach (Node b in a.Neighbours)
                 {
@@ -135,7 +139,7 @@ public class Graph : MonoBehaviour
                     if (b.Neighbours.Count > a.Neighbours.Count / 4) { continue; }
                     else
                     {
-                        b.transform.position = a.transform.position + Random.onUnitSphere * 10;
+                        b.transform.position = a.transform.position + Random.onUnitSphere * 2;
                         b.isVisited = true;
                         // recureDraw(b.Neighbours);
                     }
@@ -171,7 +175,6 @@ public class Graph : MonoBehaviour
             foreach (Node node2 in Nodes)
             {
                 if (node1 == node2) { continue; }
-              //  Nodes[3]=new Node();
                 int sum = 0;
                 if (node1.Neighbours.Count >= node2.Neighbours.Count)
                 {
@@ -213,13 +216,8 @@ public class Graph : MonoBehaviour
 
 
     }
-
     public void setScale(float newScale)
     {
         transform.localScale = new Vector3(1, 1, 1) * newScale;
-    }
-    public void Init()
-    {
-
     }
 }
