@@ -57,18 +57,17 @@ public class NodeComparer : MonoBehaviour
         }
 
 
-        foreach (Node nodea in node1Neighbours)
-        {
-            foreach (Node nodeb in node2Neighbours)
-            {
-                if (nodea == nodeb)
-                {
-                    nodea.rend.material.color = Color.cyan;
-                    nodeb.rend.material.color = Color.cyan;
-                }
-            }
-
-        }
+        //foreach (Node nodea in node1Neighbours)
+        //{
+        //    foreach (Node nodeb in node2Neighbours)
+        //    {
+        //        if (nodea == nodeb)
+        //        {
+        //            nodea.rend.material.color = Color.cyan;
+        //            nodeb.rend.material.color = Color.cyan;
+        //        }
+        //    }
+        //}
     }
 
     public void SetNodeA(string a)

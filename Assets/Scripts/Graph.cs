@@ -78,24 +78,20 @@ public class Graph : MonoBehaviour
             {
                 case "RProtein":
                 case "Protein":
-                    //Vector3 random_protein_position = Random.onUnitSphere * 10;
                     randomPosition.y = 0;
                     node.transform.position = randomPosition;
                     break;
                 case "RPathway":
                 case "Pathway":
-                    //Vector3 random_pathway_position = Random.onUnitSphere * 10;
                     randomPosition.y = -5;
                     node.transform.position = randomPosition;
                     break;
                 case "RGene":
                 case "Gene":
-                    //Vector3 random_gene_position = Random.onUnitSphere * 10;
                     randomPosition.y = 5;
                     node.transform.position = randomPosition;
                     break;
                 case "Disorder":
-                    //Vector3 random_disorder_position = Random.onUnitSphere * 10;
                     randomPosition.y = 10;
                     node.transform.position = randomPosition;
                     break;
@@ -136,7 +132,7 @@ public class Graph : MonoBehaviour
                 foreach (Node b in a.Neighbours)
                 {
                     if (b.isVisited) { continue; }
-                    if (b.Neighbours.Count > a.Neighbours.Count / 4) { continue; }
+                    if (b.Neighbours.Count > a.Neighbours.Count / 3) { continue; }
                     else
                     {
                         b.transform.position = a.transform.position + Random.onUnitSphere * 2;
